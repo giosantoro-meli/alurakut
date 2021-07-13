@@ -2,7 +2,16 @@ import styled from 'styled-components'
 import MainGrid from '../src/components/MainGrid'
 import Box from '../src/components/Box'
 
+function ProfileSideBar(prop){
+  return (
+      <Box >
+        <img src={`https://github.com/${prop.githubUser}.png`} style={{borderRadius: "8px"}}/>
+      </Box>
+  )
+}
+
 export default function Home() {
+  const githubUser = "giosantoro-meli";
   return (
   <MainGrid>
     <div className="profileArea" style={
@@ -10,9 +19,7 @@ export default function Home() {
         gridArea: "profileArea"
       }
     }>
-      <Box >
-        <img src="https://github.com/giosantoro-meli.png"/>
-      </Box>
+      <ProfileSideBar githubUser={githubUser}/>
     </div>
     <div className="welcomeArea" style={
       {
