@@ -25,12 +25,31 @@ function ProfileSideBar(prop){
 
 export default function Home() {
   const githubUser = "giosantoro-meli";
-  // useState has a 
-  const [comunidades, setComunidades] = React.useState(["Alurakut"]);
+  const [comunidades, setComunidades] = React.useState([{
+    id: '13123123123',
+    titulo: 'Eu odeio acordar cedo',
+    image: 'https://img10.orkut.br.com/community/52cc4290facd7fa700b897d8a1dc80aa.jpg'
+  },
+  {
+    id: '1312312324234123',
+    titulo: 'Discografias',
+    image: 'https://img10.orkut.br.com/community/f50f08c3f0acf3519578cbc92f81089c.jpg'
+  },
+  {
+    id: '13123123132423443',
+    titulo: 'Eu ofereço comida no MSN',
+    image: 'https://img10.orkut.br.com/community/b0fbba9e4d7b601f153319e23818a106.jpg'
+  },
+  {
+    id: '1312343232423123123',
+    titulo: 'Anão vestido de palhaço mata 8',
+    image: 'https://images-cdn.9gag.com/photo/aKVwG8Z_700b.jpg'
+  }
+  ]);
   const pessoasFavoritas = ['vivian-tanaka', 'matheusmeli', 'rsalewski','AlberAlmeida'];
   return (
   <>
-  <AlurakutMenu />
+  <AlurakutMenu githubUser={githubUser} />
   <MainGrid>
     <div className="profileArea" style={
       {
@@ -56,15 +75,22 @@ export default function Home() {
           </h2>
           <form onSubmit={(e) => {
               e.preventDefault();
+              const dadosDoForm = new FormData(e.target);
 
-              const comunidadesAtualizadas = [...comunidades, 'Alura Stars'];
+              const comunidade = {
+                id: new Date().toISOString,
+                titulo: dadosDoForm.get('titulo'),
+                image: dadosDoForm.get('image')
+              };
+
+              const comunidadesAtualizadas = [...comunidades, comunidade];
               setComunidades(comunidadesAtualizadas);
             }
           }>
             <div>
               <input 
                 placeholder="Qual vai ser o nome da sua comunidade?" 
-                name="title" 
+                name="titulo" 
                 aria-label="Qual vai ser o nome da sua comunidade?"
                 type="text" />
             </div>
@@ -94,8 +120,8 @@ export default function Home() {
         <ul>
         { pessoasFavoritas.map((itemAtual) => {
           return (
-            <li>
-              <a href={`users/${itemAtual}`} key={itemAtual}>
+            <li key={itemAtual}>
+              <a href={`users/${itemAtual}`}>
                 <img src={`https://github.com/${itemAtual}.png`} />
                 <span>{itemAtual}</span>
             </a>
@@ -111,10 +137,10 @@ export default function Home() {
         <ul>
         { comunidades.map((itemAtual) => {
           return (
-            <li>
-              <a href={`users/${itemAtual}`} key={itemAtual}>
-                <img src={`http://placehold.it/300x300`} />
-                <span>{itemAtual}</span>
+            <li key={itemAtual.id}>
+              <a href={`users/${itemAtual.titulo}`} key={itemAtual.titulo}>
+                <img src={itemAtual.image} />
+                <span>{itemAtual.titulo}</span>
             </a>
             </li>
           )
