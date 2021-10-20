@@ -1,5 +1,5 @@
-import { createGlobalStyle, ThemeProvider } from 'styled-components'
-import { AlurakutStyles } from '../src/lib/AlurakutCommons'
+import {createGlobalStyle, ThemeProvider} from 'styled-components'
+import {AlurakutStyles} from '../src/lib/AlurakutCommons'
 
 const GlobalStyle = createGlobalStyle`
   /*Reset CSS */
@@ -30,18 +30,18 @@ const GlobalStyle = createGlobalStyle`
 `
 
 const theme = {
-  colors: {
-    primary: '#0070f3',
-  },
+    colors: {
+        primary: '#0070f3',
+    },
 }
 
-export default function App({ Component, pageProps }) {
-  return (
-    <>
-      <GlobalStyle />
-      <ThemeProvider theme={theme}>
-        <Component {...pageProps} />
-      </ThemeProvider>
-    </>
-  )
+export default function App({Component, pageProps}) {
+    return (
+        <>
+            <GlobalStyle/>
+            <ThemeProvider theme={theme}>
+                <Component {...pageProps} />
+            </ThemeProvider>
+        </>
+    )
 }
